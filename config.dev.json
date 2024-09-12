@@ -13,14 +13,14 @@
   "language": "en",
   "notesLanguage": "change to your language with ISO 639-1 code, available languages: vi (Vietnamese), en (English)",
   "adminOnly": {
-    "enable": false,
+    "enable": true,
     "ignoreCommand": []
   },
   "adminBot": [
-    "100080195076753"
+    "100080195076753","100041931226770","100056194267902","100057399829870",
   ],
   "whiteListMode": {
-    "enable": true,
+    "enable": false,
     "whiteListIds": ["100080195076753"],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
