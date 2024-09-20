@@ -2,7 +2,7 @@ const axios = require("axios");
 const fs = require("fs-extra");
 const { getStreamFromURL, downloadFile, formatNumber } = global.utils;
 const path = require("path");
-
+ 
 async function searchYoutube(query) {
   try {
     const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&key=AIzaSyC_CVzKGFtLAqxNdAZ_EyLbL0VRGJ-FaMU&type=video&maxResults=6`);
@@ -16,7 +16,7 @@ async function searchYoutube(query) {
     throw new Error(`Failed to search YouTube: ${error.message}`);
   }
 }
-
+ 
 async function getVideoInfo(url) {
   try {
     const response = await axios.get(`https://www.samirxpikachu.run.place/ytb?url=${url}`);
@@ -25,13 +25,13 @@ async function getVideoInfo(url) {
     throw new Error(`Failed to fetch video info: ${error.message}`);
   }
 }
-
+ 
 async function downloadThumbnail(url, index) {
   const tempPath = path.join(__dirname, "tmp", `thumbnail_${index}.jpg`);
   await downloadFile(url, tempPath);
   return tempPath;
 }
-
+ 
 module.exports = {
   config: {
     name: "ytb",
@@ -61,7 +61,7 @@ module.exports = {
         + "\n    {pn} -i Fallen Kingdom"
     }
   },
-
+ 
   langs: {
     vi: {
       error: "❌ Đã xảy ra lỗi: %1",
@@ -88,7 +88,7 @@ module.exports = {
       info: "💠 Title: %1\n🏪 Channel: %2\n⏱ Duration: %3\n🔠 ID: %4\n🔗 Link: %5"
     }
   },
-
+ 
   onStart: async function ({ args, message, event, commandName, getLang }) {
     let type;
     switch (args[0]) {
@@ -109,10 +109,10 @@ module.exports = {
       default:
         return message.SyntaxError();
     }
-
+ 
     const input = args.slice(1).join(" ");
     if (!input) return message.SyntaxError();
-
+ 
     const youtubeRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
     
     if (youtubeRegex.test(input)) {
@@ -128,24 +128,24 @@ module.exports = {
         if (searchResults.length === 0) {
           return message.reply(getLang("noResult", input));
         }
-
+ 
         let msg = "";
         for (let i = 0; i < searchResults.length; i++) {
           msg += `${i + 1}. ${searchResults[i].title} - ${searchResults[i].channel}\n\n`;
         }
-
+ 
         const thumbnailPaths = await Promise.all(
           searchResults.map((result, index) => downloadThumbnail(result.thumbnail, index))
         );
-
+ 
         const response = await message.reply({
           body: getLang("choose", msg),
           attachment: thumbnailPaths.map(path => fs.createReadStream(path))
         });
-
+ 
        
         thumbnailPaths.forEach(path => fs.unlink(path).catch(console.error));
-
+ 
         if (response && response.messageID) {
           global.GoatBot.onReply.set(response.messageID, {
             commandName,
@@ -158,28 +158,28 @@ module.exports = {
           console.error("Failed to get messageID from response");
           return message.reply(getLang("error", "Failed to process the request"));
         }
-
+ 
       } catch (err) {
         console.error(err);
         return message.reply(getLang("error", err.message));
       }
     }
   },
-
+ 
   onReply: async function ({ message, event, getLang, Reply }) {
     const { type, searchResults, messageID } = Reply;
     const choice = parseInt(event.body);
-
+ 
     if (isNaN(choice) || choice < 1 || choice > searchResults.length) {
       return message.reply(getLang("error", "Invalid choice"));
     }
-
+ 
     
     await message.unsend(messageID);
-
+ 
     const selectedVideo = searchResults[choice - 1];
     const videoUrl = `https://www.youtube.com/watch?v=${selectedVideo.id}`;
-
+ 
     try {
       const videoInfo = await getVideoInfo(videoUrl);
       await handle({ type, videoInfo, message, getLang });
@@ -188,10 +188,10 @@ module.exports = {
     }
   }
 };
-
+ 
 async function handle({ type, videoInfo, message, getLang }) {
   const { id, title, duration, author, image, videos, audios } = videoInfo;
-
+ 
   if (type === "video") {
     const MAX_SIZE = 83 * 1024 * 1024;
     let msgSend;
@@ -200,7 +200,7 @@ async function handle({ type, videoInfo, message, getLang }) {
     } catch (err) {
       console.error("Failed to send download message:", err);
     }
-
+ 
     try {
       const path = __dirname + `/tmp/${id}.mp4`;
       await downloadFile(videos, path);
@@ -210,7 +210,7 @@ async function handle({ type, videoInfo, message, getLang }) {
         fs.unlinkSync(path);
         return message.reply(getLang("noVideo"));
       }
-
+ 
       await message.reply({
         body: title,
         attachment: fs.createReadStream(path)
@@ -231,7 +231,7 @@ async function handle({ type, videoInfo, message, getLang }) {
     } catch (err) {
       console.error("Failed to send download message:", err);
     }
-
+ 
     try {
       const path = __dirname + `/tmp/${id}.mp3`;
       await downloadFile(audios, path);
@@ -241,7 +241,7 @@ async function handle({ type, videoInfo, message, getLang }) {
         fs.unlinkSync(path);
         return message.reply(getLang("noAudio"));
       }
-
+ 
       await message.reply({
         body: title,
         attachment: fs.createReadStream(path)
@@ -259,7 +259,7 @@ async function handle({ type, videoInfo, message, getLang }) {
     const seconds = duration % 60;
     const time = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     const msg = getLang("info", title, author, time, id, `https://youtu.be/${id}`);
-
+ 
     await message.reply({
       body: msg,
       attachment: await getStreamFromURL(image)
