@@ -1,5 +1,5 @@
 // set bash title
-process.stdout.write("\x1b]2;Goat Bot V2 - Made by NTKhang\x1b\x5c");
+process.stdout.write("\x1b]2;Goat Bot V2 - Mika Ai\x1b\x5c");
 const defaultRequire = require;
 
 function decode(text) {
@@ -77,10 +77,10 @@ const titles = [
 		"█▄█ █▄█ █▀█ ░█░  █▄█ █▄█ ░█░  ▀▄▀ █▄"
 	],
 	[
-		"G O A T B O T  V 2 @" + currentVersion
+		"Mika @" + currentVersion
 	],
 	[
-		"GOATBOT V2"
+		"MIKA AI"
 	]
 ];
 const maxWidth = process.stdout.columns;
@@ -98,7 +98,7 @@ for (const text of title) {
 	const textColor = gradient("#FA8BFF", "#2BD2FF", "#2BFF88")(text);
 	centerText(textColor, text.length);
 }
-let subTitle = `GoatBot V2@${currentVersion}- A simple Bot chat messenger use personal account`;
+let subTitle = `MIKA AI@${currentVersion}- A simple Bot chat messenger use personal account`;
 const subTitleArray = [];
 if (subTitle.length > maxWidth) {
 	while (subTitle.length > maxWidth) {
@@ -112,7 +112,7 @@ if (subTitle.length > maxWidth) {
 else {
 	subTitleArray.push(subTitle);
 }
-const author = ("Created by NTKhang with ♡");
+const author = ("IF YOU DON'T USE MIKA YOU'RE A GAY/LESBIAN");
 const srcUrl = ("Source code: https://github.com/ntkhang03/Goat-Bot-V2");
 const fakeRelease = ("ALL VERSIONS NOT RELEASED HERE ARE FAKE");
 for (const t of subTitleArray) {
