@@ -1,9 +1,9 @@
 const axios = require("axios")
 module.exports = {
 	config: {
-		name: 'Mika',
+		name: 'zephyrus',
 		version: '1.2',
-		author: 'TawsiN',
+		author: 'kylepogi',
 		countDown: 5,
 		role: 0,
 		shortDescription: 'ai',
@@ -30,9 +30,9 @@ module.exports = {
 			error: 'mika đang bận, bạn hãy thử lại sau'
 		},
 		en: {
-			turnedOn: 'Turned on MIKA successfully!',
-			turnedOff: 'Turned off MIKA successfully!',
-			chatting: 'Already Chatting with mika...',
+			turnedOn: 'Turned on Zephyrus successfully!',
+			turnedOff: 'Turned off Zephyrus successfully!',
+			chatting: 'Already Chatting with zep...',
 			error: 'nani!?😦'
 		}
 	},
