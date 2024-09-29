@@ -1,7 +1,7 @@
 
 module.exports = {
     config: {
-        name: ".",
+        name: "p",
         version: "1.1",
         author: "--USER--",
         countDown: 5,
@@ -12,10 +12,10 @@ module.exports = {
     },
     onStart: async function () {},
     onChat: async function ({ event, message, getLang, api }) {
-        const trigger = 'mika';
+        const trigger = 'zep';
 
         if (event.body && event.body.toLowerCase() === trigger) {
-            return message.reply(`Hey senpai, did you call me?\n\n🌐 System prefix: ${global.GoatBot.config.prefix}\n🛸 Your box chat prefix: ${utils.getPrefix(event.threadID)}`);
+            return message.reply(`╭〣Hey senpai, did you call me?\n〡\n╰◈➣ 🌐 System prefix: ${global.GoatBot.config.prefix}\n🛸 Your box chat prefix: ${utils.getPrefix(event.threadID)}`);
         }
     }
 };
