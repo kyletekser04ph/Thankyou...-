@@ -17,26 +17,26 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "100080195076753","100041931226770","100056194267902","100057399829870","100077446221335","100042061672382"
+    "61566232924755"
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": ["100080195076753"],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "nickNameBot": "🥺̶𝓶̶̶𝓲̶̶𝓴̶̶𝓪̶😚",
-  "prefix": "/",
+  "nickNameBot": "𝖹𝖤𝖯𝖧𝖸𝖱𝖴𝖲 𝗔𝗜 ᴷʸᴸᴱ'ˢ ᴮᴼᵀ𓃵",
+  "prefix": ".",
   "database": {
-    "type": "mongodb",
-    "uriMongodb": "mongodb+srv://tawsin69:tawsinXbot@cluster0.afdws.mongodb.net/GoatBOTV2?retryWrites=true&w=majority&appName=Cluster0",
+    "type": "",
+    "uriMongodb": "",
     "autoSyncWhenStart": false,
     "autoRefreshThreadInfoFirstTime": true,
     "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. If you choose mongodb, enter uri connect mongodb in the uriMongodb section, instructions to get uri connect mongodb at: https://youtu.be/z1f9urHW5xY. I recommend using 'mongodb' or 'sqlite', json is not recommended because it is not stable. (2) when you set autoSyncWhenStart to true, the bot will automatically synchronize the data in the database when starting the bot, this will make the bot start slower. (3) when you set autoRefreshThreadInfoFirstTime to true, the bot will automatically refresh the thread information when get first message from the thread since starting the bot"
   },
-  "timeZone": "Asia/Dhaka",
+  "timeZone": "Asia/Manila",
   "credentials": {
     "gmailAccount": {
-      "email": "tawsinislam155@gmail.com",
+      "email": "kivlynx24@gmail.com",
       "clientId": "91590230522-e1dmfhcafq18elgiol1ei804juc001te.apps.googleusercontent.com",
       "clientSecret": "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",
       "refreshToken": "1//04bcdN3JjJ2iyCgYIARAAGAQSNwF-L9IrnDnX6pDMzazChDzlcQoEBgS6qdHkG0MjjvIVu5nHTVK5e2ysIIIBTo5vBGU7dZF__9s",
@@ -66,7 +66,7 @@
     "notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
   },
   "autoUptime": {
-    "enable": false,
+    "enable": true,
     "timeInterval": 180,
     "url": "",
     "notes": "the value of timeInterval is seconds, url is the url you want to send the request to (automatically detected for hosting glitch or replit)"
